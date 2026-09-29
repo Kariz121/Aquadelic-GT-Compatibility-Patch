@@ -69,12 +69,6 @@ By V33, the investigation had already narrowed the problem to ownership/removal 
 
 Some intermediate V17–V27 diagnostic executables also contained instrumentation bugs of their own. These were corrected during the investigation and were never intended for release.
 
-## Missing V34 record
-
-The preserved chat history does not contain a complete standalone record for the transition from V33 to V34.
-
-This is not treated as a separate public feature gap because the surviving later documentation records the final root cause and the root fix implemented immediately afterwards.
-
 ## Clean RootFix V35 — double-free root fix
 
 The final cause was identified in the `TCameraLifter` destruction path.
