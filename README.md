@@ -1,4 +1,7 @@
 # Aquadelic GT Compatibility Patch
+## Download
+
+**[Download the latest release](https://github.com/Kariz121/Aquadelic-GT-Compatibility-Patch/releases/latest)**
 
 Unofficial compatibility patch for **Aquadelic GT** focused on fixing crashes and initialization problems on modern Windows while keeping the original game behavior intact.
 
