@@ -6,6 +6,16 @@ Unofficial compatibility patch for **Aquadelic GT** on Windows, Linux/Proton and
 
 [Download the latest release](https://github.com/Kariz121/Aquadelic-GT-Compatibility-Patch/releases)
 
+## Microsoft Defender
+
+An earlier Windows build triggered a false positive detection by Microsoft Defender.
+
+Microsoft reviewed the submitted RC6 Windows executable and confirmed that it did not meet their criteria for malware or potentially unwanted applications. The detection was removed.
+
+If an old warning still appears, update Microsoft Defender signatures to clear outdated detections.
+
+[View Microsoft's detection removal confirmation](https://imgur.com/a/ZQx2pwv)
+
 ## What's new in v1.1.0
 
 - Support for verified Steam 1.4 and retail game installations.
