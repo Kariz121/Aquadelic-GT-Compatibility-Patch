@@ -1,0 +1,13 @@
+# Build products
+/dist/
+*.exe
+*.7z
+*.zip
+
+# Local/editor files
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
+.vscode/
+.idea/

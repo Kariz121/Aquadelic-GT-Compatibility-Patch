@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Aquadelic GT — Compatibility Patcher 1.1.0 RC6</title>
+<style>
+:root{color-scheme:dark;--bg:#0d1523;--panel:#182438;--line:#344258;--text:#eef4ff;--muted:#aebdd1;--accent:#5bc5e9;--good:#72e2be;--warn:#ffd58f;--danger:#ff9a9a}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse 80% 45% at 50% -10%,#22436b 0%,transparent 90%),var(--bg);color:var(--text);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}main{width:min(850px,94vw);margin:30px auto 65px}header{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:28px}.mark{font-weight:900;letter-spacing:.04em;color:var(--accent);font-size:14px}.muted{color:var(--muted)}h1{font-size:clamp(24px,5vw,34px);line-height:1.2;margin:7px 0 6px}h2{font-size:18px;margin:0 0 14px}section{background:var(--panel);padding:22px;border:1px solid var(--line);border-radius:16px;margin:18px 0;box-shadow:0 12px 40px #0002}label{display:block;font-weight:650;margin-bottom:7px}.field{width:100%;border:1px solid #52647c;background:#0f1929;color:var(--text);border-radius:10px;padding:13px;font:inherit;min-width:0}.line{display:flex;gap:10px;align-items:center}.line .field{flex:1}button{border:1px solid #57718c;border-radius:10px;color:var(--text);background:#263c57;padding:12px 16px;font:600 14px/1.2 inherit;cursor:pointer;white-space:nowrap}button:hover{background:#325579}button:disabled{opacity:.48;cursor:not-allowed}.primary{background:#1d85a7;color:#fff;border-color:#39aace}.primary:hover{background:#269dc1}.danger{background:#402631;border-color:#884859}.danger:hover{background:#643443}.small{font-size:13px;padding:9px 12px}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.choice{cursor:pointer;border:1px solid var(--line);border-radius:12px;padding:15px;background:#122034;min-height:142px}.choice:has(input:checked){border:2px solid var(--accent);padding:14px;background:#12304a}.choice input{accent-color:var(--accent)}.choice b{display:block;margin:7px 0 3px}.choice span{display:block;font-size:13px;color:var(--muted);font-weight:400;line-height:1.4}.pill{display:inline-block;background:#24435b;border:1px solid #446781;border-radius:999px;padding:5px 12px;font-size:12px}.status{border-left:3px solid var(--accent);border-radius:6px;background:#101d2e;padding:14px;margin-top:14px;white-space:pre-wrap;overflow-wrap:anywhere}.status.good{border-left-color:var(--good)}.status.bad{border-left-color:var(--danger)}.buttons{display:flex;gap:10px;flex-wrap:wrap}.subtle{font-size:13px;color:var(--muted);margin:8px 0}details{margin:12px 0;border-radius:10px;border:1px solid var(--line);background:#122034;padding:13px 16px}summary{cursor:pointer;font-weight:700}.topology{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}.topo{padding:14px;border:1px solid #37516d;border-radius:10px;background:#122439}.topo h3{font-size:15px;margin:0 0 9px}.topo p{margin:5px 0;color:var(--muted);font-size:13px}.keys{background:#33475f;border:1px solid #617791;padding:1px 6px;border-radius:5px;white-space:nowrap;color:#fff}footer{font-size:12px;color:var(--muted);text-align:center;padding:14px}#busy{display:none;color:var(--warn)}@media(max-width:620px){.cards,.topology{grid-template-columns:1fr}.line{flex-wrap:wrap}.line button{width:100%}.buttons button{flex:1}section{padding:18px}header{align-items:flex-start;flex-direction:column}}
+
+</style></head><body><main id="app">
+<header><div><div class="mark">AQUADELIC GT / COMMUNITY PATCH</div><h1>Compatibility Patcher <span style="color:var(--accent)">1.1.0 RC6</span></h1><div class="muted">Find your game. Choose your controls. Apply compatible fixes.</div></div></header>
+<section aria-labelledby="gameTitle"><h2 id="gameTitle">1. Game location</h2><p class="subtle">The patcher looks for installed Steam games automatically. You can also browse for a folder containing <b>Run.exe</b>.</p>
+<label for="candidate">Detected installations</label><select class="field" id="candidate"><option value="">Scanning…</option></select>
+<div style="height:12px"></div><label for="path">Game folder</label><div class="line"><input class="field" id="path" spellcheck="false" placeholder="Folder containing Run.exe"><button onclick="pick()" class="small">Browse…</button><button onclick="discover()" class="small">Scan again</button></div>
+<div class="status" id="status" role="status">Select a game installation, then click Check files.</div></section>
+<section aria-labelledby="controlsTitle"><h2 id="controlsTitle">2. Controller configuration</h2><div class="cards">
+<label class="choice"><input type="radio" name="mode" value="none"><b>No controller changes</b><span>Keep the original Steam 1.4 controller layout. Install compatibility fixes only.</span></label>
+<label class="choice"><input type="radio" name="mode" value="analog" checked><b>Boat Analog</b><span>R2 / L2 control boat throttle directly. Hydroplane throttle uses Step.</span></label>
+<label class="choice"><input type="radio" name="mode" value="step"><b>Boat Step</b><span>R2 increases and holds power; L2 reduces it, including reverse.</span></label></div>
+<details><summary>View the controller layout</summary><div style="margin:16px auto 4px;max-width:420px"><svg viewBox="0 0 440 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Controller diagram: L2 reduces throttle, R2 increases throttle, left stick steers, right stick controls boat camera or hydroplane rudder">
+<path d="M112 59 Q90 55 78 86 L32 183 Q28 221 65 223 Q85 224 111 179 L138 151 L303 151 L329 179 Q356 224 375 223 Q413 222 408 183 L361 86 Q349 55 328 59 Z" fill="#233950" stroke="#85a9c6" stroke-width="4"/>
+<rect x="93" y="23" width="85" height="30" rx="9" fill="#536b89" stroke="#89b6ce"/><rect x="264" y="23" width="85" height="30" rx="9" fill="#536b89" stroke="#89b6ce"/>
+<text x="135" y="44" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">L2</text><text x="307" y="44" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">R2</text>
+<circle cx="133" cy="117" r="31" fill="#102033" stroke="#69c8e8" stroke-width="4"/><circle cx="293" cy="148" r="31" fill="#102033" stroke="#69c8e8" stroke-width="4"/><circle cx="133" cy="117" r="17" fill="#54738f"/><circle cx="293" cy="148" r="17" fill="#54738f"/>
+<path d="M207 93 h13 v-13 h14 v13 h13 v14 h-13 v13 h-14 v-13 h-13z" fill="#67839e"/>
+<circle cx="329" cy="87" r="10" fill="#9c73c8"/><circle cx="353" cy="108" r="10" fill="#d49b5c"/><circle cx="304" cy="108" r="10" fill="#67b6a1"/><circle cx="329" cy="128" r="10" fill="#cb748d"/>
+<text x="133" y="172" text-anchor="middle" fill="#dcf8ff" font-size="13">Left stick</text><text x="293" y="198" text-anchor="middle" fill="#dcf8ff" font-size="13">Right stick</text>
+</svg></div>
+<div class="topology"><div class="topo"><h3>🚤 Boat (Analog / Step)</h3>
+<p><span class="keys">L2</span> Reverse / decrease throttle</p><p><span class="keys">R2</span> Forward / increase throttle</p>
+<p><span class="keys">Left stick ← →</span> Steer</p><p><span class="keys">Right stick ← → ↓</span> Left / right / rear camera</p>
+<p><span class="keys">X / □</span> Quick menu</p><p><span class="keys">LB / L1</span> PDA</p><p><span class="keys">Arrow keys</span> Original keyboard controls</p></div>
+<div class="topo"><h3>✈️ Hydroplane (both modes)</h3>
+<p><span class="keys">R2</span> Increase power (Step)</p><p><span class="keys">L2</span> Decrease power (Step)</p>
+<p><span class="keys">Left stick</span> Pitch and roll</p><p><span class="keys">Right stick ← →</span> Additional rudder; no camera changes</p>
+<p><span class="keys">Page Up / Down</span> Keyboard engine power</p><p><span class="keys">Arrow keys</span> Keyboard flight controls</p>
+<p><span class="keys">Z / X</span> Additional rudder on keyboard</p><p><span class="keys">A / S / D</span> Keyboard camera views</p></div></div>
+</details></section>
+<section aria-labelledby="installTitle"><h2 id="installTitle">3. Install or restore</h2><p class="subtle">Close the game and launcher before modifying files. The patcher verifies SHA-256 hashes and backs up your originals. Profiles and save data are not modified.</p>
+<div class="buttons"><button onclick="check()">Check files</button><button id="installBtn" class="primary" onclick="install()" disabled>Install / change mode</button><button class="danger" id="restoreBtn" onclick="restore()" disabled title="Available when a v1.1.0 installation is detected">Restore original files</button></div>
+<p id="busy">Working with game files — do not close the patcher…</p><div class="status" id="result" role="status" style="display:none"></div></section>
+<footer>Unofficial community patch • Requires your own game copy • No original game executables included<br><button class="small" onclick="finish()">Exit patcher</button></footer></main>
+<script>
+const TOKEN='{{.Token}}';
+let busy=false, lastStatus=null, userChoseMode=false;
+const $=id=>document.getElementById(id);
+function setResult(text,success=true){const el=$('result');el.style.display='block';el.className='status '+(success?'good':'bad');el.textContent=text;}
+function syncButtons(){document.querySelectorAll('button').forEach(b=>{b.disabled=busy;});$('restoreBtn').disabled=busy||!lastStatus||!lastStatus.active;$('installBtn').disabled=busy||!lastStatus||!lastStatus.ready;}
+async function api(endpoint,args={}){
+  const r=await fetch('/api/'+endpoint,{method:'POST',headers:{'Content-Type':'application/json','X-AQGT-Token':TOKEN},body:JSON.stringify(args)});
+  let body;try{body=await r.json();}catch{throw Error('The patcher service is no longer available. Reopen the application.');}
+  if(!r.ok||!body.ok)throw Error(body.error||'Unknown error');return body;
+}
+function gamePath(){return $('path').value.trim();}
+function selectedMode(){return document.querySelector('input[name=mode]:checked').value;}
+async function runAction(fn){
+ if(busy)return;busy=true;$('busy').style.display='block';syncButtons();
+ try{await fn();}catch(err){setResult('STOP: '+err.message,false);}finally{busy=false;$('busy').style.display='none';syncButtons();}
+}
+async function checkInner(){
+ if(!gamePath()){lastStatus=null;syncButtons();$('status').textContent='Select the game folder first.';return;}
+ const answer=await api('check',{game:gamePath()});const st=answer.status;lastStatus=st;
+ const el=$('status');el.className='status '+(st.ready?'good':'bad');
+ let heading=st.edition||'Unknown edition';
+ heading+=' • '+(st.active?(st.ready?'Patcher installed ('+st.mode+')':'Existing installation needs attention'):'Not installed');
+ el.textContent=heading+'\n'+st.info+(st.run_sha256?'\nRun.exe SHA-256: '+st.run_sha256:'');
+ if(st.edition==='retail-1.2'){
+   document.querySelector('input[name=mode][value=none]').checked=true;
+   document.querySelectorAll('input[name=mode]').forEach(e=>e.disabled=e.value!=='none');
+ }else{
+   document.querySelectorAll('input[name=mode]').forEach(e=>e.disabled=false);
+   if(st.active && !userChoseMode){const radio=document.querySelector('input[name=mode][value="'+st.mode+'"]');if(radio)radio.checked=true;}
+ }
+ syncButtons();
+}
+async function check(){await runAction(checkInner);}
+async function discover(){
+ await runAction(async()=>{
+   const response=await api('discover');const choices=response.candidates||[];const select=$('candidate');select.replaceChildren();
+   let option=document.createElement('option');option.value='';option.textContent=choices.length?'Choose a game installation…':'No installation found — browse or enter a path';select.append(option);
+   choices.forEach(c=>{const op=document.createElement('option');op.value=c.path;op.textContent=c.path+' • '+c.edition+(c.active?' • Installed':'');select.append(op);});
+   const preferred=choices.find(c=>c.active)||choices[0];
+   if(preferred){select.value=preferred.path;$('path').value=preferred.path;await checkInner();}
+   else {lastStatus=null;$('status').textContent='No game found automatically. Use Browse or paste a folder path.';syncButtons();}
+ });
+}
+async function install(){
+ // Capture the intended choice BEFORE checking files. A status refresh must
+ // never silently replace the user's Analog/Step selection with the active mode.
+ const requestedMode=selectedMode();
+ if(!confirm('Is Aquadelic GT and its launcher closed? Apply the selected patch?'))return;
+ await runAction(async()=>{
+   await checkInner();
+   if(!lastStatus?.ready)throw Error('The selected installation is not ready. See Check files.');
+   const x=await api('install',{game:gamePath(),mode:requestedMode});
+   userChoseMode=false;
+   setResult(x.message,true);
+   await checkInner();
+ });
+}
+async function restore(){
+ if(!lastStatus?.active){setResult('No v1.1.0 installation detected. Select the correct game folder and click Check files.',false);return;}
+ if(!confirm('Restore the original game files from the saved backup? Close the game and launcher first.'))return;
+ await runAction(async()=>{const x=await api('restore',{game:gamePath()});setResult(x.message,true);await checkInner();});
+}
+async function pick(){await runAction(async()=>{const x=await api('pick');if(x.path){$('path').value=x.path;await checkInner();}else setResult('No folder selected. You can paste the game folder path instead.',false);});}
+async function finish(){
+ if(busy)return;
+ try{await api('exit');}catch(e){};
+ document.body.innerHTML='<main><section><h1>Patcher closed</h1><p>The patcher has exited. You can close this browser tab.</p></section></main>';
+}
+document.querySelectorAll('input[name=mode]').forEach(e=>e.addEventListener('change',()=>{if(e.checked)userChoseMode=true;}));
+$('candidate').addEventListener('change',()=>{userChoseMode=false;$('path').value=$('candidate').value;lastStatus=null;syncButtons();if(gamePath())check();});
+$('path').addEventListener('input',()=>{userChoseMode=false;lastStatus=null;syncButtons();$('status').textContent='Click Check files to inspect this installation.';});
+syncButtons();discover();
+</script></body></html>

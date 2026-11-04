@@ -1,40 +1,21 @@
-# Building the patcher
+# Building from source
 
-The source is written as a small Win32 C application.
+The Windows and Linux executables are built from the **same Go source code**. For a byte-for-byte match with the published v1.1.0 binaries, install **Go 1.23.2** from [go.dev](https://go.dev/dl/). Other Go versions may produce different files.
 
-## Requirements
+## Quick build
 
-A MinGW-w64 toolchain capable of producing 32-bit Windows executables.
+- **On Windows:** run `build.bat`.
+- **On Linux:** run `./build.sh` (or `bash build.sh`).
 
-The build script expects:
+Both scripts run `go test ./...` and `go vet ./...`, build the Windows x86 and Linux x64 versions into `dist/`, and verify their SHA-256 hashes.
 
-```text
-i686-w64-mingw32-gcc
-```
+## Expected SHA-256
 
-## Build
+| Target | SHA-256 |
+|---|---|
+| Windows x86 | `30334e6f104c2a2a5272989268896890ee6abbffd024d50e8ef115190b97018a` |
+| Linux x64 | `dc0690eaea682a53609097e7df6aa8050ede4d1b62650bf6b203cd1a78df2db9` |
 
-From the repository root, run:
+The downloadable asset filenames do not affect their contents or hashes. Windows builds use `GOOS=windows GOARCH=386`; Linux builds use `GOOS=linux GOARCH=amd64`. Both use `CGO_ENABLED=0` and the flags recorded in the build scripts.
 
-```bat
-build.bat
-```
-
-The resulting executable will be written to:
-
-```text
-build\Aquadelic_GT_Patcher.exe
-```
-
-The source targets Windows XP / Server 2003-era Win32 APIs (`WINVER=0x0501`)
-so that the resulting 32-bit executable can also run on later 32-bit Windows
-and under WOW64 on later 64-bit Windows.
-
-## Important
-
-The repository does not contain the complete original or modified Aquadelic GT
-`Run.exe`.
-
-The patch table contains only the replacement bytes required by the supported
-compatibility patch. Before changing anything, the patcher identifies the
-supported executable by SHA-256.
+Go 1.23.2 is retained solely to reproduce this historical release; it is not a currently supported toolchain. Keep antivirus protection enabled when testing locally built executables.
